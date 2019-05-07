@@ -1,0 +1,89 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.prodigy.**.dao.impl"/>
+    <context:component-scan base-package="com.prodigy.**.dao.security"/>
+    <context:component-scan base-package="com.prodigy.**.dao.commission"/>
+
+<!--
+    <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
+        <jdbc:script location="classpath:db/${jdbc.initLocation}"/>
+        <jdbc:script encoding="utf-8" location="classpath:db/${jdbc.initPopulate}"/>
+    </jdbc:initialize-database>
+-->
+
+<!--
+    <beans profile="hsqldb">
+        <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
+        &lt;!&ndash;no pooling&ndash;&gt;
+        <bean id="dataSource"
+              class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+              p:driverClassName="org.hsqldb.jdbcDriver"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}"/>
+    </beans>
+-->
+
+    <beans profile="mysql">
+        <context:property-placeholder location="classpath:db/mysql.properties" system-properties-mode="OVERRIDE"/>
+
+<!--
+        <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+              p:driverClassName="${database.driverClassName}"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}" />
+-->
+
+        <bean id="dataSource" class="org.apache.tomcat.jdbc.pool.DataSource"
+              p:driverClassName="${database.driverClassName}"
+              p:url="${database.url}"
+              p:username="${database.username}"
+              p:password="${database.password}"
+              p:initialSize="5"
+              p:maxIdle="5"
+              p:minIdle="1"
+              p:testWhileIdle="true"
+              p:testOnBorrow="true"
+              p:validationQuery="SELECT 1"/>
+    </beans>
+
+    <beans profile="hsqldb,mysql">
+        <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+              p:dataSource-ref="dataSource"
+              p:packagesToScan="com.prodigy.**.model">
+
+            <property name="jpaPropertyMap">
+                <map>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).FORMAT_SQL}" value="${hibernate.format_sql}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).USE_SQL_COMMENTS}"
+                           value="${hibernate.use_sql_comments}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).DIALECT}" value="${hibernate.dialect}"/>
+                    <entry key="#{T(org.hibernate.cfg.AvailableSettings).ENABLE_LAZY_LOAD_NO_TRANS}" value="false"/>
+                </map>
+            </property>
+
+            <property name="jpaVendorAdapter">
+                <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" p:showSql="${jpa.showSql}">
+                </bean>
+            </property>
+        </bean>
+
+        <tx:annotation-driven/>
+
+        <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"
+              p:entityManagerFactory-ref="entityManagerFactory"/>
+
+        <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver"/>
+    </beans>
+
+</beans>
