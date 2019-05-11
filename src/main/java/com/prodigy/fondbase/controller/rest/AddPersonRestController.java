@@ -1,6 +1,5 @@
 package com.prodigy.fondbase.controller.rest;
 
-import com.prodigy.fondbase.model.Address;
 import com.prodigy.fondbase.model.Subscriber;
 import com.prodigy.fondbase.service.SubscriberService;
 import com.prodigy.fondbase.to.SubscriberTo;
@@ -28,7 +27,7 @@ public class AddPersonRestController {
     @RequestMapping(value = "/add", consumes = MediaType.APPLICATION_JSON_VALUE, method = RequestMethod.POST)
     public ResponseEntity<SubscriberTo> save(@RequestBody SubscriberTo subscriberTo){
 
-        Subscriber subscriber = subscriberService.convertTo(subscriberTo);
+        Subscriber subscriber = subscriberService.convertToAndSave(subscriberTo);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

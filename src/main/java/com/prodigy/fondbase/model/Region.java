@@ -19,6 +19,10 @@ public class Region extends AbstractNamedEntity {
     public Region() {
     }
 
+    public Region(Region region){
+        super(region.getId(), region.getName());
+    }
+
     public Region(Integer id, String name) {
         super(id, name);
     }

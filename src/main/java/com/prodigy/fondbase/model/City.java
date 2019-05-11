@@ -21,6 +21,10 @@ public class City extends AbstractNamedEntity {
     public City() {
     }
 
+    public City(City city){
+        super(city.getId(), city.getName());
+    }
+
     public City(Integer id, String name) {
         super(id, name);
     }

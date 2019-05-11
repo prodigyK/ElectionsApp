@@ -26,7 +26,7 @@ public interface SubscriberService{
 
     SubscriberTo convertEntity(Subscriber subscriber);
 
-    Subscriber convertTo(SubscriberTo to);
+    Subscriber convertToAndSave(SubscriberTo to);
 
     Subscriber save(Subscriber subscriber);
 

@@ -13,6 +13,10 @@ public class Street extends AbstractNamedEntity {
     public Street() {
     }
 
+    public Street(Street street){
+        super(street.getId(), street.getName());
+    }
+
     public Street(Integer id, String name) {
         super(id, name);
     }

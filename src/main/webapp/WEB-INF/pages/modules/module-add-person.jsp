@@ -16,12 +16,11 @@
 <br>
 <br>
 <br>
-
-<div class="container ui form padded blue secondary segment tiny">
+<div class="container">
     <h4 class="text-center"><i class="user icon"></i> Додати людину</h4>
     <%--<form:form modelAttribute="person" action="modules/module-add-person/edit" method="post">--%>
         <input type="hidden" id="id" name="id"/>
-        <div class="ui tiny form" style="margin-left: 20px; margin-right: 20px;">
+        <div class="ui tiny form padded blue secondary segment tiny" style="margin-left: 120px; margin-right: 120px;">
             <h6 class="ui dividing header">Данные человека</h6>
             <div class="fields">
                 <div class="six wide field">
@@ -67,15 +66,15 @@
             <div class="fields">
                 <div class="six wide field">
                     <label>ИИН</label>
-                    <input class="form-control font-weight-bold" type="text" id="iin"/>
+                    <input class="form-control font-weight-bold" type="text" id="iin" placeholder="12345678"/>
                 </div>
                 <div class="six wide field">
                     <label>Паспорт</label>
-                    <input class="form-control font-weight-bold" type="text" id="passport"/>
+                    <input class="form-control font-weight-bold" type="text" id="passport" placeholder="KK012345"/>
                 </div>
                 <div class="six wide field">
                     <label>Дата видачи</label>
-                    <input path="dateOfIssue" class="form-control font-weight-bold" id="dateOfIssue" type="date" value=""/>
+                    <input class="form-control font-weight-bold" id="dateOfIssue" type="date"/>
                 </div>
             </div>
             <div class="inline field">
@@ -272,7 +271,6 @@
             <p id="success_text"></p>
         </div>
 </div>
-
 <br>
 <br>
 

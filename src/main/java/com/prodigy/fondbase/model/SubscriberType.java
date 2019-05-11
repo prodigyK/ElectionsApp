@@ -8,18 +8,16 @@ import java.util.List;
 @Table(name = "bf_subscriber_type")
 public class SubscriberType extends AbstractNamedEntity{
 
-/*
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "bf_subscriber_subscriber_type",
-            joinColumns = {@JoinColumn(name = "type_id")},
-            inverseJoinColumns = {@JoinColumn(name = "subscriber_id")}
-    )
-*/
+    public static final int STORONNIK_TYPE = 1000;
+
     @ManyToMany(mappedBy = "subscriberTypes", fetch = FetchType.LAZY)
     private List<Subscriber> subscribers = new ArrayList<>();
 
     public SubscriberType() {
+    }
+
+    public SubscriberType(Integer id, String name) {
+        super(id, name);
     }
 
     public List<Subscriber> getSubscribers() {

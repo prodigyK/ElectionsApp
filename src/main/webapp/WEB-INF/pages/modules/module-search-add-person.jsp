@@ -13,18 +13,18 @@
 <br>
 <br>
 <br>
-<div class="container ui padded blue secondary segment tiny">
+<div class="container">
     <h4 class="text-center"><i class="fas fa-search"></i> Пошук / Додання людей</h4>
-    <div class="ui tiny form">
-        <h3 class="ui dividing header"></h3>
+    <div class="ui tiny form padded blue secondary segment margin_form" style="margin-left: 60px; margin-right: 60px;">
+        <%--<h3 class="ui dividing header"></h3>--%>
         <div class="fields">
             <div class="four wide field">
                 <label>ИИН</label>
-                <input class="form-control" type="text" id="iin"/>
+                <input class="form-control" type="text" id="iin" placeholder="12345678"/>
             </div>
             <div class="four wide field">
                 <label>Паспорт</label>
-                <input class="form-control" type="text" id="passport">
+                <input class="form-control" type="text" id="passport" placeholder="KK012345"/>
             </div>
         </div>
         <div class="fields">
@@ -101,11 +101,11 @@
                 </div>
 
             </div>
-<%--
-            <div class="ui right floated button small" tabindex="0" onclick="getPeople()"><i class="fas fa-search"></i><br>
-                Поиск
-            </div>
---%>
+            <%--
+                        <div class="ui right floated button small" tabindex="0" onclick="getPeople()"><i class="fas fa-search"></i><br>
+                            Поиск
+                        </div>
+            --%>
         </div>
         <button class="ui button small" onclick="openForm()" id="search">
             <i class="user icon"></i>
@@ -121,20 +121,22 @@
 
 <div class="container hidden" id="datatable_div">
     <%--<hr>--%>
-    <table class="ui single line table blue table-hover very compact small" id="datatable">
-        <thead class="table-secondary">
-        <tr>
-            <th>id</th>
-            <th>Призвище</th>
-            <th>Iм'я</th>
-            <th>По батькові</th>
-            <th>Район</th>
-            <th>Вулиця</th>
-            <th>Дом</th>
-            <th>Квартира</th>
-        </tr>
-        </thead>
-    </table>
+    <div style="margin-left: 60px; margin-right: 60px;">
+        <table class="ui single line table blue table-hover very compact small" id="datatable">
+            <thead class="table-secondary">
+            <tr>
+                <th>id</th>
+                <th>Призвище</th>
+                <th>Iм'я</th>
+                <th>По батькові</th>
+                <th>Район</th>
+                <th>Вулиця</th>
+                <th>Дом</th>
+                <th>Квартира</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
 </div>
 <br>
 <br>

@@ -50,6 +50,19 @@ public class Address extends AbstractBaseEntity {
     public Address() {
     }
 
+    public Address(Address address) {
+        super(address.getId());
+        this.area = address.getArea();
+        this.sector = address.getSector();
+        this.mailIndex = address.getMailIndex();
+        this.region = new Region(address.getRegion());
+        this.city = new City(address.getCity());
+        this.district = new District(address.getDistrict());
+        this.house = new House(address.getHouse());
+        this.flat = address.getFlat();
+        this.livingPlace = address.getLivingPlace();
+    }
+
     public House getHouse() {
         return house;
     }

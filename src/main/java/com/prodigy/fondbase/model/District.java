@@ -13,6 +13,10 @@ public class District extends AbstractNamedEntity {
     public District() {
     }
 
+    public District(District district){
+        super(district.getId(), district.getName());
+    }
+
     public District(Integer id, String name) {
         super(id, name);
     }

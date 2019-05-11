@@ -136,6 +136,7 @@ function savePerson() {
         $("#district_reg").val() === "" ||
         $("#street_reg").val() === ""){
         alert("Не заполнены все поля адреса");
+            return;
     }
     if(!livingForRegistration){
         if($("#region").val() === "" ||
@@ -143,10 +144,9 @@ function savePerson() {
             $("#district").val() === "" ||
             $("#street").val() === ""){
             alert("Не заполнены все поля адреса");
+            return;
         }
     }
-
-
 
     var person = {
         id: $("#id").val(),

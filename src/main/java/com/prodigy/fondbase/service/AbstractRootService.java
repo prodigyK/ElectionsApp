@@ -2,6 +2,7 @@ package com.prodigy.fondbase.service;
 
 import com.prodigy.fondbase.dao.*;
 import com.prodigy.fondbase.model.*;
+import com.prodigy.fondbase.service.logging.LoggingMainService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public abstract class AbstractRootService {
@@ -36,5 +37,7 @@ public abstract class AbstractRootService {
     @Autowired
     protected SubscriberTypeDao subscriberTypeDao;
 
+    @Autowired
+    protected LoggingMainService loggingMainService;
 
 }

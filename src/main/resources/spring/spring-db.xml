@@ -12,6 +12,7 @@
     <context:component-scan base-package="com.prodigy.**.dao.impl"/>
     <context:component-scan base-package="com.prodigy.**.dao.security"/>
     <context:component-scan base-package="com.prodigy.**.dao.commission"/>
+    <context:component-scan base-package="com.prodigy.**.dao.logging"/>
 
 <!--
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">

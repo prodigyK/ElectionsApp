@@ -26,8 +26,12 @@ public class House extends AbstractBaseEntity {
     public House() {
     }
 
-    public House(Integer id) {
-        super(id);
+    public House(House house) {
+        super(house.getId());
+        this.street = new Street(house.getStreet());
+        this.houseNumber = house.getHouseNumber();
+        this.corps = house.getCorps();
+        this.letter = house.getLetter();
     }
 
     public House(Street street, String houseNumber, String corps, String letter) {
