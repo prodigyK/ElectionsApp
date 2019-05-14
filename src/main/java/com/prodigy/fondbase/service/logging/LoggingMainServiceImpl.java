@@ -14,6 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +63,8 @@ public class LoggingMainServiceImpl implements LoggingMainService {
 
 
             if (previousSubscriber == null) {
+
+                main.setNew(true);
 
                 loggingChanges.add(new LoggingChanges("Фамилия", "", newSubscriber.getLastname()));
                 loggingChanges.add(new LoggingChanges("Имя", "", newSubscriber.getFirstname()));
@@ -394,5 +399,29 @@ public class LoggingMainServiceImpl implements LoggingMainService {
         List<LoggingChanges> loggingChanges = new ArrayList<>();
 
         return false;
+    }
+
+    @Override
+    public List<LoggingMain> getAllForToday() {
+        return loggingMainDao.getAllForToday();
+    }
+
+    @Override
+    public List<LoggingMain> getByUserBetweenDates(Integer userId, LocalDate from, LocalDate to) {
+
+        if(from == null || to == null){
+            return new ArrayList<LoggingMain>();
+        }
+
+        LocalDateTime dateFrom = LocalDateTime.of(from, LocalTime.of(0, 0));
+        LocalDateTime dateTo = LocalDateTime.of(to, LocalTime.of(23, 59));
+
+        if(userId == null){
+            return loggingMainDao.getBetweenDates(dateFrom, dateTo);
+        }
+
+        return loggingMainDao.getByUserBetweenDates(userId, dateFrom, dateTo);
+
+
     }
 }

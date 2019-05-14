@@ -1,5 +1,6 @@
 package com.prodigy.fondbase.model.logging;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.prodigy.fondbase.model.AbstractBaseEntity;
 
 import javax.persistence.*;
@@ -17,6 +18,7 @@ public class LoggingChanges extends AbstractBaseEntity{
     @Column(name = "newValue")
     private String newValue;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "log_main_id")
     private LoggingMain main;

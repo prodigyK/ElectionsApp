@@ -4,19 +4,20 @@ package com.prodigy.fondbase.model.logging;
 import com.prodigy.fondbase.model.AbstractBaseEntity;
 import com.prodigy.fondbase.model.Subscriber;
 import com.prodigy.fondbase.model.security.User;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "bf_log_main")
 public class LoggingMain extends AbstractBaseEntity {
 
-    @Temporal(TemporalType.TIMESTAMP)
+    @CreationTimestamp
     @Column(name = "changed")
-    private Date timeChange = new Date();
+    private LocalDateTime timeChange;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -33,10 +34,13 @@ public class LoggingMain extends AbstractBaseEntity {
     @OneToMany(mappedBy = "main", fetch = FetchType.EAGER)
     private List<LoggingChanges> changes = new ArrayList<>();
 
+    @Column(name = "is_new")
+    private Boolean isNew = false;
+
     public LoggingMain() {
     }
 
-    public Date getTimeChange() {
+    public LocalDateTime getTimeChange() {
         return timeChange;
     }
 
@@ -70,5 +74,14 @@ public class LoggingMain extends AbstractBaseEntity {
 
     public void setChanges(List<LoggingChanges> changes) {
         this.changes = changes;
+    }
+
+    @Override
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setNew(boolean aNew) {
+        isNew = aNew;
     }
 }

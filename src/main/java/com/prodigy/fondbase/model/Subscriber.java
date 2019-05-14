@@ -1,7 +1,11 @@
 package com.prodigy.fondbase.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +46,7 @@ public class Subscriber extends AbstractBaseEntity {
     @OneToMany(mappedBy = "subscriber", fetch = FetchType.LAZY)
     private List<Address> addresses = new ArrayList<>();
 
+    @JsonIgnore
     @OneToOne(mappedBy = "subscriber", fetch = FetchType.LAZY)
     private Phone phone;
 
@@ -53,6 +58,10 @@ public class Subscriber extends AbstractBaseEntity {
             inverseJoinColumns = {@JoinColumn(name = "type_id")}
     )
     private List<SubscriberType> subscriberTypes = new ArrayList<>();
+
+    @UpdateTimestamp
+    @Column(name = "changed")
+    private LocalDateTime timeChange;
 
     public Subscriber() {
     }
@@ -161,5 +170,8 @@ public class Subscriber extends AbstractBaseEntity {
         this.subscriberTypes = subscriberTypes;
     }
 
+    public LocalDateTime getTimeChange() {
+        return timeChange;
+    }
 }
 

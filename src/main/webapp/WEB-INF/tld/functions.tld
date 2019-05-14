@@ -10,7 +10,7 @@
 
     <function>
         <name>formatDate</name>
-        <function-class>com.prodigy.fondbase.utils.LocalDateConverter</function-class>
-        <function-signature>java.lang.String toString(java.time.LocalDate)</function-signature>
+        <function-class>com.prodigy.fondbase.utils.DateTimeUtil</function-class>
+        <function-signature>java.lang.String toString(java.time.LocalDateTime)</function-signature>
     </function>
 </taglib>
