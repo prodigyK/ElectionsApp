@@ -20,7 +20,8 @@ function getPeople() {
         region: $("#region").val(),
         city: $("#city").val(),
         district: $("#district").val(),
-        street: $("#street").val()
+        street: $("#street").val(),
+        house: $("#houseNumber").val()
     };
     debugger;
 
@@ -47,35 +48,12 @@ function getPeople() {
 
 }
 
-function save() {
-    $.ajax({
-        type: "POST",
-        url: ajaxSearchUrl,
-        dataType: 'text',
-        contentType: 'application/json; charset=utf-8',
-        data: JSON.stringify(saveElection())
-    }).done(function () {
-        $("#editRow").modal("hide");
-        updateTable();
-        successNoty("common.saved");
-    });
-}
-
-function saveElection() {
-    var person = {
-        id: $("#id").val(),
-        name: $("#name").val(),
-        fullName: $("#fullName").val(),
-        electionDate: $("#electionDate").val()
-    };
-    return person;
-}
-
 function clearForm() {
-    $("#region").val('');
-    $("#city").val('');
+    // $("#region").val('');
+    // $("#city").val('');
     $("#district").val('');
     $("#street").val('');
+    $("#houseNumber").val('');
     $("#lastname").val('');
     $("#firstname").val('');
     $("#middlename").val('');
@@ -152,7 +130,7 @@ $(document).ready(function () {
 
     $('#lastname').focusout(function () {
         result = "";
-        $("#lastname_results").addClass("hidden");
+        closeAllDropdowns();
     });
 
     $('#lastname').keyup(function () {
@@ -182,6 +160,7 @@ $(document).ready(function () {
         var keycode = (event.keyCode ? event.keyCode : event.which);
         if (keycode == '13') {
             getPeople();
+            closeAllDropdowns();
         }
     });
 
@@ -194,7 +173,7 @@ $(document).ready(function () {
 
     $('#firstname').focusout(function () {
         result = "";
-        $("#firstname_results").addClass("hidden");
+        closeAllDropdowns();
     });
 
     $('#firstname').keyup(function () {
@@ -227,7 +206,7 @@ $(document).ready(function () {
 
     $('#middlename').focusout(function () {
         result = "";
-        $("#middlename_results").addClass("hidden");
+        closeAllDropdowns();
     });
 
     $('#middlename').keyup(function () {
@@ -260,7 +239,7 @@ $(document).ready(function () {
 
     $('#street').focusout(function () {
         result = "";
-        $("#street_results").addClass("hidden");
+        closeAllDropdowns();
     });
 
     $('#street').keyup(function () {
@@ -287,6 +266,14 @@ $(document).ready(function () {
     });
 
 });
+
+function closeAllDropdowns() {
+
+    $("#lastname_results").addClass("hidden");
+    $("#firstname_results").addClass("hidden");
+    $("#middlename_results").addClass("hidden");
+    $("#street_results").addClass("hidden");
+}
 
 
 $(document).ready(function () {

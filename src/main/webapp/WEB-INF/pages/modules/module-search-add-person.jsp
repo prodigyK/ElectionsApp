@@ -93,13 +93,17 @@
                     </c:forEach>
                 </select>
             </div>
-            <div class="five wide field">
+            <div class="six wide field">
                 <label>Вулиця</label>
                 <input type="text" id="street">
                 <div class="dropdown_list hidden" id="street_results">
 
                 </div>
 
+            </div>
+            <div class="two wide field">
+                <label>Дом</label>
+                <input type="text" id="houseNumber">
             </div>
             <%--
                         <div class="ui right floated button small" tabindex="0" onclick="getPeople()"><i class="fas fa-search"></i><br>
@@ -111,7 +115,11 @@
             <i class="user icon"></i>
             Додати людину
         </button>
-        <button class="ui right floated active button small" onclick="getPeople()">
+        <button class="ui button small ml-2" onclick="clearForm()" id="clearForm">
+            <i class="trash icon"></i>
+            Очистити
+        </button>
+        <button class="ui right floated button small" onclick="getPeople()">
             <i class="search icon"></i>
             Пошук
         </button>

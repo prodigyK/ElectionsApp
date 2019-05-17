@@ -5,6 +5,7 @@ import com.prodigy.fondbase.model.Street;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -14,10 +15,25 @@ public class StreetDaoImpl extends EntityDaoImpl implements StreetDao {
     @Override
     public Street getByName(String street) {
 
-        String query = "SELECT s FROM Street s WHERE s.name LIKE '%" + street + "%'";
+        street = street.replace("'", "''");
+        String query = "SELECT s FROM Street s WHERE s.name LIKE '" + street + "%'";
         Street result = null;
         try {
-            result = (Street) em.createQuery(query).getSingleResult();
+            result = (Street) em.createQuery(query).setMaxResults(1).getSingleResult();
+        } catch (Exception e){
+            return null;
+        }
+
+        return result;
+    }
+
+    @Override
+    public List<Street> getAllByName(String street) {
+        street = street.replace("'", "''");
+        String query = "SELECT s FROM Street s WHERE s.name LIKE '" + street + "%'";
+        List<Street> result = new ArrayList<>();
+        try {
+            result = em.createQuery(query).getResultList();
         } catch (Exception e){
             return null;
         }

@@ -12,7 +12,9 @@ public interface SubscriberDao<T extends AbstractBaseEntity> extends EntityDao {
 
     List<String> getFirstnames();
 
-    List<Subscriber> searchPeople(Subscriber subscriber);
+//    List<Subscriber> searchPeople(Subscriber subscriber);
+
+    List<Subscriber> searchPeople(Subscriber subscriber, String street);
 
     List<String> searchByLastname(String lastname);
 

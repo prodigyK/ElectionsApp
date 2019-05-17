@@ -67,21 +67,22 @@ public class SubscriberServiceImpl extends AbstractRootService implements Subscr
             district = (District) districtDao.get(District.class, Integer.parseInt(searchSubscriberTo.getDistrict()));
             address.setDistrict(district);
         }
-        Street street = null;
+        String street = null;
+        List<Street> streets = new ArrayList<>();
         if (!"".equals(searchSubscriberTo.getStreet()) && searchSubscriberTo.getStreet() != null) {
-            street = (Street) streetDao.getByName(searchSubscriberTo.getStreet());
-            if (street != null) {
-                House house = new House();
-                house.setStreet(street);
-                address.setHouse(house);
-            }
+//            streets = streetDao.getAllByName(searchSubscriberTo.getStreet());
+//            street = (Street) streetDao.getByName(searchSubscriberTo.getStreet());
+            street = searchSubscriberTo.getStreet();
+            House house = new House();
+            house.setHouseNumber(searchSubscriberTo.getHouse());
+            address.setHouse(house);
         }
 
         List<Address> addresses = new ArrayList<>();
         addresses.add(address);
         subscriber.setAddresses(addresses);
 
-        List<Subscriber> result = subscriberDao.searchPeople(subscriber);
+        List<Subscriber> result = subscriberDao.searchPeople(subscriber, street);
 
         return result;
 

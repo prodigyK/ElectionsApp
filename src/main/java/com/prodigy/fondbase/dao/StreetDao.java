@@ -8,6 +8,8 @@ public interface StreetDao<T extends Street> extends EntityDao{
 
     Street getByName(String street);
 
+    List<Street> getAllByName(String street);
+
     List<String> searchByStreetName(String street);
 
     List<Street> getAllByCity(int cityId);
