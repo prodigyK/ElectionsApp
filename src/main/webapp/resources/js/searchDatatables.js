@@ -11,6 +11,9 @@ function updateTableByData(data) {
 }
 
 function getPeople() {
+
+    loadingAdd($("#search_button"));
+
     var person = {
         iin: $("#iin").val(),
         passport: $("#passport").val(),
@@ -36,16 +39,21 @@ function getPeople() {
             result = JSON.parse(response);
             debugger;
             openDatatable(result);
+            loadingRemove($("#search_button"));
         },
         error: function () {
-            debugger;
-            var v = 12;
+            loadingRemove($("#search_button"));
         }
     });
 
+}
 
-    var test = 10;
+function loadingAdd(element) {
+    element.addClass("loading disabled");
+}
 
+function loadingRemove(element) {
+    element.removeClass("loading disabled");
 }
 
 function clearForm() {

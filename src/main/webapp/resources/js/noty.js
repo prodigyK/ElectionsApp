@@ -14,7 +14,7 @@ function successNoty(key) {
         text: "<span class='fa fa-lg fa-check'></span> &nbsp;" + i18n[key],
         type: 'success',
         layout: "bottomRight",
-        timeout: 3000
+        timeout: 1000
     }).show();
 }
 
@@ -25,6 +25,6 @@ function failNoty(jqXHR) {
         text: "<span class='fa fa-lg fa-exclamation-circle'></span> &nbsp;" + i18n["common.errorStatus"] + ": <br>" + jqXHR.responseText,
         type: "error",
         layout: "bottomRight",
-        timeout: 5000
+        timeout: 3000
     }).show();
 }

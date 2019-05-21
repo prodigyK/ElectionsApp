@@ -124,25 +124,27 @@ $(document).ready(function () {
 })
 
 
-
 function savePerson() {
+
+    loadingAdd($("#save_button"));
+
     var storonnik = $("#type_storonnik").is(":checked");
     var livingForRegistration = $("#living_for_registration").is(":checked");
 
     debugger;
 
-    if($("#region_reg").val() === "" ||
+    if ($("#region_reg").val() === "" ||
         $("#city_reg").val() === "" ||
         $("#district_reg").val() === "" ||
-        $("#street_reg").val() === ""){
+        $("#street_reg").val() === "") {
         alert("Не заполнены все поля адреса");
-            return;
+        return;
     }
-    if(!livingForRegistration){
-        if($("#region").val() === "" ||
+    if (!livingForRegistration) {
+        if ($("#region").val() === "" ||
             $("#city").val() === "" ||
             $("#district").val() === "" ||
-            $("#street").val() === ""){
+            $("#street").val() === "") {
             alert("Не заполнены все поля адреса");
             return;
         }
@@ -221,12 +223,10 @@ function savePerson() {
             debugger;
             successNoty("common.saved");
             clearForm();
-            sleep(3000);
-            window.open("modules/module-add-person");
+            loadingRemove($("#save_button"));
         },
         error: function () {
-            debugger;
-            var v = 12;
+            loadingRemove($("#save_button"));
         }
     });
 
@@ -239,6 +239,14 @@ function savePerson() {
 function save() {
 
 
+}
+
+function loadingAdd(element) {
+    element.addClass("loading disabled");
+}
+
+function loadingRemove(element) {
+    element.removeClass("loading disabled");
 }
 
 function clearForm() {

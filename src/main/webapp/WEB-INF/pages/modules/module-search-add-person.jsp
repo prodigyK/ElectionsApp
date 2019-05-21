@@ -119,7 +119,7 @@
             <i class="trash icon"></i>
             Очистити
         </button>
-        <button class="ui right floated button small" onclick="getPeople()">
+        <button class="ui right floated button small" onclick="getPeople()" id="search_button">
             <i class="search icon"></i>
             Пошук
         </button>
