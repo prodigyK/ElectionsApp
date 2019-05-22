@@ -51,9 +51,14 @@
                 <input path="birthday" class="form-control font-weight-bold" id="birthday" type="date" value=""/>
             </div>
             <div class="six wide field">
-                <label>Телефон</label>
-                <input path="phone" class="form-control font-weight-bold" type="text" id="phone"
+                <label>Моб. телефон</label>
+                <input class="form-control font-weight-bold" type="text" id="phone"
                        placeholder="xxx1234567"/>
+            </div>
+            <div class="six wide field">
+                <label>Дом. телефон</label>
+                <input class="form-control font-weight-bold" type="text" id="homephone"
+                       placeholder="048xxxxxxx"/>
             </div>
             <div class="six wide field">
                 <label>Пошта</label>

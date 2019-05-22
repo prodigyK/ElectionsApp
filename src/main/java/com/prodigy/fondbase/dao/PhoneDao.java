@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface PhoneDao<T extends Phone> extends EntityDao{
 
-    List<Phone> getBySubscriberId(int subscriberId);
+    List<Phone> getAllBySubscriberId(int subscriberId);
+
+    Phone getBySubscriberId(int subscriberId);
 }

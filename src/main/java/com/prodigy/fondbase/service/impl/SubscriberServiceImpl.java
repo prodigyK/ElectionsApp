@@ -164,8 +164,9 @@ public class SubscriberServiceImpl extends AbstractRootService implements Subscr
 
         Phone phone = subscriber.getPhone();
         to.setPhone((phone == null) ? "" : phone.getCellPhone());
+        to.setHomephone((phone == null) ? "" : phone.getHomePhone());
 
-        List<Address> addresses = subscriber.getAddresses();//addressDao.getBySubscriberId(subscriber.getId());
+        List<Address> addresses = subscriber.getAddresses();//addressDao.getAllBySubscriberId(subscriber.getId());
         for (Address address : addresses) {
             if (address.getLivingPlace() == LivingPlace.REGISTRATION_AND_RESIDENCE_PLACE) {
                 to.setLivingForRegistration(true);
@@ -200,7 +201,13 @@ public class SubscriberServiceImpl extends AbstractRootService implements Subscr
             previousSubscriber.setFirstname(dbSubscriber.getFirstname() == null ? "" : dbSubscriber.getFirstname());
             previousSubscriber.setMiddlename(dbSubscriber.getMiddlename() == null ? "" : dbSubscriber.getMiddlename());
             previousSubscriber.setBirthday(dbSubscriber.getBirthday());
-            previousSubscriber.setPhone(dbSubscriber.getPhone() == null ? null : new Phone(dbSubscriber.getPhone().getCellPhone()));
+            Phone phone = null;
+            if (dbSubscriber.getPhone() != null) {
+                phone = new Phone();
+                phone.setCellPhone(dbSubscriber.getPhone().getCellPhone());
+                phone.setHomePhone(dbSubscriber.getPhone().getHomePhone());
+            }
+            previousSubscriber.setPhone(phone);
             previousSubscriber.setEmail(dbSubscriber.getEmail() == null ? "" : dbSubscriber.getEmail());
             previousSubscriber.setIin(dbSubscriber.getIin() == null ? "" : dbSubscriber.getIin());
             previousSubscriber.setPassport(dbSubscriber.getPassport() == null ? "" : dbSubscriber.getPassport());
@@ -388,13 +395,31 @@ public class SubscriberServiceImpl extends AbstractRootService implements Subscr
         subscriber = save(subscriber);
 
         // Add phone number
+        Phone dbPhone = phoneDao.getBySubscriberId(subscriber.getId());
+        if (dbPhone != null) {
+            dbPhone.setCellPhone(to.getPhone());
+            dbPhone.setHomePhone(to.getHomephone());
+        } else {
+            Phone phone = new Phone();
+            phone.setCellPhone(to.getPhone());
+            phone.setHomePhone(to.getHomephone());
+            phone.setSubscriber(subscriber);
+            phone = (Phone) phoneDao.save(phone);
+            subscriber.setPhone(phone);
+        }
+
+/*
         if (!"".equals(to.getPhone().trim())) {
-            Phone phone = (subscriber.getPhone() != null) ? subscriber.getPhone() : new Phone(to.getPhone());
+//            Phone phone = (subscriber.getPhone() != null) ? subscriber.getPhone() : new Phone(to.getPhone());
             phone.setCellPhone(to.getPhone());
             phone.setSubscriber(subscriber);
             phone = (Phone) phoneDao.save(phone);
             subscriber.setPhone(phone);
         }
+        if (!"".equals((to.getHomephone().trim()))) {
+            phone.setHomePhone(to.getHomephone());
+        }
+*/
 
         // Add addresses
         List<Address> newAddresses = new ArrayList<>();

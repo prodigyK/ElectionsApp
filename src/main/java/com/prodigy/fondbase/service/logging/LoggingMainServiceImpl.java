@@ -138,16 +138,30 @@ public class LoggingMainServiceImpl implements LoggingMainService {
                 loggingChanges.add(log);
             }
             if (previousSubscriber.getPhone() == null && newSubscriber.getPhone() != null) {
-                LoggingChanges log = new LoggingChanges("Телефон", "", newSubscriber.getPhone().getCellPhone());
-                loggingChanges.add(log);
+                if(newSubscriber.getPhone().getCellPhone()!=null && !"".equals(newSubscriber.getPhone().getCellPhone())){
+                    LoggingChanges log = new LoggingChanges("Моб. телефон", "", newSubscriber.getPhone().getCellPhone());
+                    loggingChanges.add(log);
+                }
+                if(newSubscriber.getPhone().getHomePhone()!=null && !"".equals((newSubscriber.getPhone().getHomePhone()))){
+                    LoggingChanges log = new LoggingChanges("Дом. телефон", "", newSubscriber.getPhone().getHomePhone());
+                    loggingChanges.add(log);
+                }
             } else if (previousSubscriber.getPhone() != null && newSubscriber.getPhone() == null) {
                 if (!"".equals(previousSubscriber.getPhone().getCellPhone())) {
-                    LoggingChanges log = new LoggingChanges("Телефон", previousSubscriber.getPhone().getCellPhone(), "");
+                    LoggingChanges log = new LoggingChanges("Моб. телефон", previousSubscriber.getPhone().getCellPhone(), "");
+                    loggingChanges.add(log);
+                }
+                if (!"".equals(previousSubscriber.getPhone().getHomePhone())) {
+                    LoggingChanges log = new LoggingChanges("Дом. телефон", previousSubscriber.getPhone().getHomePhone(), "");
                     loggingChanges.add(log);
                 }
             } else if (previousSubscriber.getPhone() != null && newSubscriber.getPhone() != null) {
                 if (!newSubscriber.getPhone().getCellPhone().equals(previousSubscriber.getPhone().getCellPhone())) {
-                    LoggingChanges log = new LoggingChanges("Телефон", previousSubscriber.getPhone().getCellPhone(), newSubscriber.getPhone().getCellPhone());
+                    LoggingChanges log = new LoggingChanges("Моб. телефон", previousSubscriber.getPhone().getCellPhone(), newSubscriber.getPhone().getCellPhone());
+                    loggingChanges.add(log);
+                }
+                if (!newSubscriber.getPhone().getHomePhone().equals(previousSubscriber.getPhone().getHomePhone())) {
+                    LoggingChanges log = new LoggingChanges("Дом. телефон", previousSubscriber.getPhone().getHomePhone(), newSubscriber.getPhone().getHomePhone());
                     loggingChanges.add(log);
                 }
             }

@@ -43,6 +43,8 @@ public class SubscriberTo {
 
     private String phone;
 
+    private String homephone;
+
     public SubscriberTo() {
     }
 
@@ -174,4 +176,11 @@ public class SubscriberTo {
         this.phone = phone;
     }
 
+    public String getHomephone() {
+        return homephone;
+    }
+
+    public void setHomephone(String homephone) {
+        this.homephone = homephone;
+    }
 }

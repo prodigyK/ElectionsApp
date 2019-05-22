@@ -12,9 +12,20 @@ import java.util.List;
 public class PhoneDaoImpl extends EntityDaoImpl implements PhoneDao {
 
     @Override
-    public List<Phone> getBySubscriberId(int subscriberId) {
+    public List<Phone> getAllBySubscriberId(int subscriberId) {
         return em.createQuery("SELECT p FROM Phone p WHERE p.subscriber.id=?1")
                 .setParameter(1, subscriberId)
                 .getResultList();
+    }
+
+    @Override
+    public Phone getBySubscriberId(int subscriberId) {
+        try {
+            return (Phone) em.createQuery("SELECT p FROM Phone p WHERE p.subscriber.id=?1")
+                    .setParameter(1, subscriberId)
+                    .getSingleResult();
+        } catch (Exception e) {
+            return null;
+        }
     }
 }

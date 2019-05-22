@@ -15,7 +15,6 @@ $(document).ready(function () {
 function init_onload(userId) {
 
     if (userId === undefined) {
-        debugger;
         return;
     }
 
@@ -26,11 +25,9 @@ function init_onload(userId) {
         contentType: 'application/json; charset=utf-8',
         success: function (response) {
             fillForm(response);
-
         },
         error: function () {
-            debugger;
-            var v = 12;
+
         }
     });
 
@@ -48,6 +45,7 @@ function fillForm(person) {
     $("#middlename").val(person.middlename);
     $("#birthday").val(person.birthday);
     $("#phone").val(person.phone);
+    $("#homephone").val(person.homephone);
     $("#email").val(person.email);
     $("#dateOfIssue").val(person.dateOfIssue);
     if (person.storonnik === true) {
@@ -157,6 +155,7 @@ function savePerson() {
         middlename: $("#middlename").val(),
         birthday: $("#birthday").val(),
         phone: $("#phone").val(),
+        homephone: $("#homephone").val(),
         email: $("#email").val(),
         iin: $("#iin").val(),
         passport: $("#passport").val(),
@@ -230,9 +229,6 @@ function savePerson() {
         }
     });
 
-
-    var test = 10;
-
 }
 
 
@@ -259,6 +255,7 @@ function clearForm() {
     $("#middlename").val('');
     $("#birthday").val('');
     $("#phone").val('');
+    $("#homephone").val('');
     $("#email").val('');
     $("#dateOfIssue").val('');
     $("#type_storonnik").prop('checked', false);
